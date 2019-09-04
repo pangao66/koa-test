@@ -1,8 +1,12 @@
 import "reflect-metadata"
 import {createKoaServer} from "routing-controllers"
-import {UserController} from "./api/v1/classic"
 
+console.log(__dirname)
 const app = createKoaServer({
-  controllers: [UserController] // we specify controllers we want to use
+  routePrefix: "/api",
+  controllers: [`${__dirname}/controllers/**/*{.js,.ts}`],
+  middlewares: [`${__dirname}/middlewares/**/*{.js,.ts}`],
+  classTransformer: true,
+  // validation: true,
 })
 app.listen(3000)
