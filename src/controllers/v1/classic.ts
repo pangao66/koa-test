@@ -39,15 +39,15 @@ export class UserController {
     return "This action returns all users"
   }
 
-  @Get("/users/")
-  getOne(@QueryParam("limit") limit: number) {
-    return "This action returns user #" + limit
-  }
+  // @Get("/users/")
+  // getOne(@QueryParam("limit") limit: number) {
+  //   return "This action returns user #" + limit
+  // }
 
-  @Post("/users")
-  post(@Body() user: any) {
-    return "Saving user..."
-  }
+  // @Post("/users")
+  // post(@Body() user: any) {
+  //   return "Saving user..."
+  // }
 
   @Post("/users/:id")
   @OnUndefined(UserNotFoundError)

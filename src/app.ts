@@ -9,6 +9,7 @@ useKoaServer(app, {
   controllers: [`${__dirname}/controllers/**/*{.js,.ts}`],
   middlewares: [`${__dirname}/middlewares/**/*{.js,.ts}`],
   classTransformer: true,
+  defaultErrorHandler: false,
   validation: {
     validationError: {
       target: false,
