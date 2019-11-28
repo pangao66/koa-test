@@ -9,9 +9,13 @@ import {
   Delete,
   QueryParam,
   HttpError,
-  OnUndefined
+  OnUndefined,
+  Req,
+  Res,
+  Ctx
 } from "routing-controllers"
-import {IsEmail, IsNotEmpty, MinLength} from 'routing-controllers/node_modules/class-validator'
+import {IsEmail, IsNotEmpty, MinLength, validate} from 'routing-controllers/node_modules/class-validator'
+import Koa from 'koa'
 
 export class UserNotFoundError extends HttpError {
   constructor() {
@@ -22,16 +26,16 @@ export class UserNotFoundError extends HttpError {
 export class User {
   @IsNotEmpty({message: '邮箱不能为空'})
   @IsEmail({}, {message: '请输入正确的邮箱'})
-  email: string | undefined
+  email!: string
   @MinLength(6, {message: '密码长度大于6字符'})
-  password: string | undefined
+  password!: string
 }
 
 @JsonController('/v1/classic')
 export class UserController {
 
   @Get("/latest")
-  getAll() {
+  getAll(@Ctx() ctx: Koa.Context) {
     return "This action returns all users"
   }
 
@@ -47,9 +51,10 @@ export class UserController {
 
   @Post("/users/:id")
   @OnUndefined(UserNotFoundError)
-  post1(@Param("id") id: number, @Body({validate: true, required: true}) user: User) {
+  post1(@Param("id") id: number, @Body({validate: true}) user: User) {
     // console.log(body)
-    // return user
+    // console.log(user)
+    return user
   }
 
   @Delete("/users/:id")
