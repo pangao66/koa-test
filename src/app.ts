@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import Koa from 'koa'
-
+import './core/db'
 const app = new Koa()
 import {useKoaServer} from "routing-controllers"
 

@@ -1,18 +1,19 @@
 import {db} from "../core/db"
 import {Sequelize, Model, Table, Column, PrimaryKey, AutoIncrement, DataType} from "sequelize-typescript"
-import {Col} from "sequelize/types/lib/utils"
 
 @Table({
-  tableName: 'user'
+  tableName: "user",
+  timestamps: false,
+  freezeTableName: true
 })
-export class User extends Model<User> {
+export default class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
   @Column
   id: number
-
-  @Column({type: DataType.STRING(64)})
-  nickname: string
+  //
+  // @Column({type: DataType.STRING(64)})
+  // nickname: string
 
   @Column
   email: string
@@ -20,9 +21,17 @@ export class User extends Model<User> {
   @Column
   password: string
 
-  @Column
-  openid: {
-    type: string,
-    unique: true
+  // @Column
+  // openid: {
+  //   type: string,
+  //   unique: true
+  // }
+  static async getList<T extends User>() {
+    const results = await this.findAll({
+      raw: true,
+    })
+    return results as T[]
   }
 }
+
+console.log('success')
