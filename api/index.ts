@@ -6,8 +6,8 @@ const OpenAIConfig = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
 })
 const openai = new OpenAIApi(OpenAIConfig)
-const runtime = "edge";
-const config = {
+export const runtime = "edge";
+export const config = {
   supportsResponseStreaming: true
 };
 const server = createServer(async (req, res) => {
