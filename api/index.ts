@@ -17,7 +17,7 @@ export const config = {
 };
 
 const server = createServer(async (req, res) => {
-    if (req.url === '/v1/chat/completions') {
+    if (req.url === '/api/v1/chat/completions') {
         const aiResponse = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             stream: true,
