@@ -20,7 +20,7 @@ const server = createServer(async (req, res) => {
     await openai.listModels({
 
     })
-    if (req.url === '/api/v1/chat/completions') {
+    if (req.url === '/v1/chat/completions') {
         const aiResponse = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             stream: true,
